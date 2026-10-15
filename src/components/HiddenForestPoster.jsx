@@ -1,19 +1,21 @@
 import { useState } from "react";
 import forest from "../assets/hidden-forest.jpg";
+import { submitLead } from "../lib/submitLead";
 
 const initialForm = { name: "", mobile: "", email: "", consent: false };
 
 const inputClass =
-  "poster-serif mt-[6px] block h-10 w-full border border-[#e3dccd] bg-white px-3 text-[14px] font-normal normal-case tracking-normal text-[#1b261d] outline-none transition placeholder:text-[#a59d8f] focus:border-[#8d4a32] short:mt-1 short:h-9 short:text-[13px] tiny:h-8";
+  "poster-serif block h-10 w-full border-0 border-b border-[#cfc6b4] bg-transparent px-0 text-[15px] font-normal normal-case tracking-normal text-[#1b261d] outline-none transition placeholder:text-[#b0a898] focus:border-[#8d4a32] short:h-9 short:text-[14px] tiny:h-8";
 
 const labelClass =
-  "ui block text-[10px] font-bold uppercase tracking-[0.16em] text-[#3b3328] tiny:text-[9px]";
+  "ui block text-[10px] font-bold uppercase tracking-[0.18em] text-[#5b5346] tiny:text-[9px]";
 
-const fieldGap = "mt-4 short:mt-3 tiny:mt-[10px]";
+const fieldGap = "mt-5 short:mt-4 tiny:mt-3";
 
 export default function HiddenForestPoster() {
   const [form, setForm] = useState(initialForm);
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("idle");
 
   const update = (field) => (event) => {
     const value =
@@ -25,14 +27,36 @@ export default function HiddenForestPoster() {
     setForm((current) => ({ ...current, [field]: value }));
   };
 
-  const onSubmit = (event) => {
+  const fail = (text) => {
+    setStatus("error");
+    setMessage(text);
+  };
+
+  const onSubmit = async (event) => {
     event.preventDefault();
-    if (!/^\d{10}$/.test(form.mobile)) {
-      setMessage("Enter a valid 10-digit mobile number.");
-      return;
+    if (!form.name.trim()) return fail("Please enter your name.");
+    if (!/^[6-9]\d{9}$/.test(form.mobile)) return fail("Enter a valid 10-digit mobile number.");
+    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      return fail("Enter a valid email address.");
     }
-    setMessage("Thank you — you're first in line.");
-    setForm(initialForm);
+    if (!form.consent) return fail("Please tick the box to agree to be contacted.");
+
+    setStatus("sending");
+    setMessage("");
+    try {
+      await submitLead({
+        name: form.name.trim(),
+        mobile: form.mobile,
+        email: form.email.trim(),
+        consent: String(form.consent),
+        source: "Hero form",
+      });
+      setStatus("sent");
+      setMessage("Thank you — you're first in line.");
+      setForm(initialForm);
+    } catch {
+      fail("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -84,64 +108,56 @@ export default function HiddenForestPoster() {
 
         <form
           onSubmit={onSubmit}
-          className="poster-serif w-full max-w-[460px] border border-[#e8dcc4] bg-[#f8f4ea] px-7 py-8 text-[#1b261d] shadow-[0_24px_60px_rgba(0,0,0,0.4)] max-[1023px]:mx-auto sm:px-9 short:py-6 tiny:py-4"
+          noValidate
+          className="poster-serif w-full max-w-[420px] bg-[#f8f4ea] px-7 py-8 text-[#1b261d] shadow-[0_24px_60px_rgba(0,0,0,0.35)] max-[1023px]:mx-auto sm:px-9 sm:py-9 short:py-6 tiny:py-5"
         >
-          <p className="ui flex items-center gap-3 text-[10px] uppercase tracking-[0.26em] text-[#7d7465] tiny:text-[9px]">
-            <span className="h-px w-7 bg-[#b9ad96]" />
-            Dear Pune / Chapter 03
-          </p>
-          <h2 className="mt-3 text-[clamp(32px,3vw,42px)] leading-[1.02] tracking-[-0.02em] short:mt-2 short:text-[34px] tiny:text-[28px]">
+          <h2 className="text-[clamp(30px,2.8vw,38px)] leading-[1.05] tracking-[-0.02em] short:text-[30px] tiny:text-[26px]">
             Get the next
             <br />
             letter first.
           </h2>
-          <p className="mt-3 text-[14px] leading-[1.5] text-[#3f4a40] short:mt-2 short:text-[13px] short:leading-[1.4] tiny:hidden">
-            Join the first-to-know list for official updates on The Hidden
-            Forest.{" "}
-            <span className="text-[#6c7268]">The complete reveal is still ahead.</span>
-          </p>
-          <p className="mt-4 flex items-center gap-3 bg-[#efe2cb] px-4 py-[10px] text-[13px] text-[#3a2f22] short:hidden">
-            <span className="text-[15px] text-[#8b5a2b]">❧</span>
-            <span>
-              Be among the first to hear{" "}
-              <span className="text-[#8d4a32]">what follows.</span>
-            </span>
+          <p className="ui mt-2 text-[13px] text-[#6c7268] short:text-[12px]">
+            Be among the first to hear what follows.
           </p>
 
-          <label className={`${labelClass} mt-5 short:mt-4 tiny:mt-3`}>
-            Your name
+          <label className={`${labelClass} mt-7 short:mt-5 tiny:mt-4`}>
+            Name
             <input
               required
+              autoComplete="name"
               value={form.name}
               onChange={update("name")}
-              placeholder="Enter your full name"
+              placeholder="Your full name"
               className={inputClass}
             />
           </label>
 
           <label className={`${labelClass} ${fieldGap}`}>
-            Mobile number
-            <span className="mt-[6px] flex gap-2 short:mt-1">
-              <span className="grid h-10 w-16 shrink-0 place-items-center border border-[#e3dccd] bg-[#f1ece2] text-[14px] font-normal tracking-normal text-[#1b261d] short:h-9 short:text-[13px] tiny:h-8">
+            Mobile
+            <span className="flex items-end gap-2 border-b border-[#cfc6b4] transition focus-within:border-[#8d4a32]">
+              <span className="pb-[9px] text-[15px] font-normal tracking-normal text-[#6c7268] short:text-[14px]">
                 +91
               </span>
               <input
                 required
+                type="tel"
                 inputMode="numeric"
+                autoComplete="tel-national"
                 value={form.mobile}
                 onChange={update("mobile")}
-                placeholder="10-digit mobile number"
+                placeholder="10-digit number"
                 aria-label="Mobile number"
-                className={`${inputClass} !mt-0 min-w-0 flex-1`}
+                className={`${inputClass} !border-b-0 min-w-0 flex-1`}
               />
             </span>
           </label>
 
           <label className={`${labelClass} ${fieldGap}`}>
             Email{" "}
-            <span className="font-normal normal-case tracking-normal">(optional)</span>
+            <span className="font-normal normal-case tracking-normal text-[#8a8478]">(optional)</span>
             <input
               type="email"
+              autoComplete="email"
               value={form.email}
               onChange={update("email")}
               placeholder="you@example.com"
@@ -149,7 +165,7 @@ export default function HiddenForestPoster() {
             />
           </label>
 
-          <label className={`flex items-start gap-3 text-[11px] leading-[1.55] text-[#4b4a42] short:text-[10px] short:leading-[1.45] ${fieldGap}`}>
+          <label className="ui mt-6 flex items-start gap-3 text-[11.5px] leading-[1.5] text-[#5b5a52] short:mt-4 short:text-[11px]">
             <input
               required
               type="checkbox"
@@ -157,33 +173,22 @@ export default function HiddenForestPoster() {
               onChange={update("consent")}
               className="mt-[2px] h-4 w-4 shrink-0 accent-[#8d4a32]"
             />
-            I agree to receive updates about The Hidden Forest. By submitting, I
-            allow the team to contact me via call, SMS or email. I can opt out
-            anytime.
+            I agree to be contacted about The Hidden Forest via call, SMS or
+            email.
           </label>
 
           <button
             type="submit"
-            className="ui mt-5 flex h-12 w-full items-center justify-between bg-[#8d4a32] px-6 text-[13px] font-bold uppercase tracking-[0.16em] text-[#fbf1e3] transition hover:bg-[#a0563a] short:mt-4 short:h-11 tiny:mt-3 tiny:h-10 tiny:text-[12px]"
+            disabled={status === "sending"}
+            className="ui mt-6 flex h-12 w-full items-center justify-between bg-[#8d4a32] px-6 text-[12.5px] font-bold uppercase tracking-[0.16em] text-[#fbf1e3] transition hover:bg-[#a0563a] disabled:cursor-wait disabled:opacity-70 short:mt-5 short:h-11 tiny:mt-4 tiny:h-10"
           >
-            Keep me first in line
+            {status === "sending" ? "Sending…" : "Keep me first in line"}
             <span className="text-[20px] font-normal">→</span>
           </button>
           <p
-            className="ui mt-4 flex items-center gap-2 text-[11px] text-[#7d7465] short:mt-3 tiny:mt-2 tiny:text-[10px]"
+            className={`ui mt-3 min-h-[16px] text-[11.5px] ${status === "error" ? "text-[#a3402a]" : status === "sent" ? "text-[#2f6b3f]" : "text-[#8a8478]"}`}
             role="status"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-3 w-3"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              aria-hidden="true"
-            >
-              <rect x="5" y="11" width="14" height="10" rx="2" />
-              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-            </svg>
             {message || "Only campaign updates. Opt out anytime."}
           </p>
         </form>

@@ -3,6 +3,7 @@ import collage from "../assets/hidden-forest-collage.jpg";
 import HiddenForestPoster from "../components/HiddenForestPoster";
 import ForestVideoBackground from "../components/ForestVideoBackground";
 import useSeo from "../hooks/useSeo";
+import { submitLead } from "../lib/submitLead";
 import forestImage from "../assets/hidden-forest.jpg";
 
 const seo = {
@@ -25,10 +26,16 @@ export default function DearPune() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    setMessage("Thank you for registering your interest — we'll be in touch soon.");
-    setEmail("");
+    setMessage("Sending…");
+    try {
+      await submitLead({ email: email.trim(), source: "Register your interest" });
+      setMessage("Thank you for registering your interest — we'll be in touch soon.");
+      setEmail("");
+    } catch {
+      setMessage("Something went wrong. Please try again.");
+    }
   };
 
   return (
