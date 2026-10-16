@@ -1,9 +1,7 @@
-import { useState } from "react";
 import collage from "../assets/hidden-forest-collage.jpg";
 import HiddenForestPoster from "../components/HiddenForestPoster";
 import ForestVideoBackground from "../components/ForestVideoBackground";
 import useSeo from "../hooks/useSeo";
-import { submitLead } from "../lib/submitLead";
 import forestImage from "../assets/hidden-forest.jpg";
 
 const seo = {
@@ -23,20 +21,6 @@ const seo = {
 
 export default function DearPune() {
   useSeo(seo);
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    setMessage("Sending…");
-    try {
-      await submitLead({ email: email.trim(), source: "Register your interest" });
-      setMessage("Thank you for registering your interest — we'll be in touch soon.");
-      setEmail("");
-    } catch {
-      setMessage("Something went wrong. Please try again.");
-    }
-  };
 
   return (
     <main className="dear-pune relative overflow-hidden bg-[#071b13] text-[#f4ead7]">
@@ -123,32 +107,6 @@ export default function DearPune() {
         <p className="ui mx-auto mb-[30px] max-w-[520px] text-[13px] leading-[1.8] text-[#e4e6da]">
           Discover an upcoming residential project envisioned for those who
           seek a more enriching way to live.
-        </p>
-        <form
-          onSubmit={onSubmit}
-          className="mx-auto flex w-full max-w-[590px] flex-col gap-[10px] sm:flex-row"
-        >
-          <input
-            required
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="Enter your email address"
-            aria-label="Email address"
-            className="ui min-w-0 flex-1 border border-[#a68b5b] bg-[#f4ead7] px-[17px] py-4 text-[13px] text-[#1a2b20] outline-none"
-          />
-          <button
-            type="submit"
-            className="ui min-h-12 border border-[#b86d4d] bg-[#91452d] px-5 text-[10px] font-bold uppercase tracking-[0.13em] text-[#fff3df] transition hover:bg-[#a85336]"
-          >
-            Register your interest&nbsp; →
-          </button>
-        </form>
-        <p className="ui mt-3 min-h-[18px] text-[12px] text-[#e2c68e]" role="status">
-          {message}
-        </p>
-        <p className="ui mt-[14px] text-[11px] text-[#cfd5c6]">
-          Campaign updates only. You can opt out anytime.
         </p>
       </section>
 
