@@ -40,7 +40,7 @@ const chapters = [
   },
 ];
 
-const upcoming = ["04", "05", "06"];
+const upcoming = ["04", "05"];
 
 function ChapterCard({ number, title, text, warm, edged }) {
   return (
