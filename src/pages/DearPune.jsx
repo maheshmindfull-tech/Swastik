@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import collage from "../assets/hidden-forest-collage.jpg";
+import logoMark from "../assets/logo-footer-dark.png";
 import HiddenForestPoster from "../components/HiddenForestPoster";
 import ForestVideoBackground from "../components/ForestVideoBackground";
 import useSeo from "../hooks/useSeo";
@@ -218,9 +220,32 @@ export default function DearPune() {
         </p>
       </section>
 
-      <footer className="ui flex flex-wrap justify-between gap-[15px] border-t border-[#dec48f]/20 px-5 py-[22px] text-[9px] uppercase tracking-[0.16em] text-[#9eaa99] sm:px-[5vw] xl:px-[76px]">
-        <span>Dear Pune · The Hidden Forest</span>
-        <span>A new chapter is coming</span>
+      <footer className="border-t border-[#eadcc4] bg-[#10281c] px-5 py-10 text-[#d5ddd0] sm:px-[5vw] sm:py-12 xl:px-[76px]">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="w-fit bg-[#f8ebd6] px-3 py-2.5">
+            <img
+              src={logoMark}
+              alt="Swastik Realty Group"
+              className="h-16 w-auto sm:h-[76px]"
+            />
+          </div>
+          <p className="poster-serif text-[clamp(28px,3.1vw,42px)] font-normal italic leading-none tracking-[-0.02em] text-[#e6d3a1]">
+            With love, to a city called Pune.
+          </p>
+        </div>
+        <div className="my-8 h-px bg-[#f4ead7]/25" />
+        <div className="ui flex flex-col gap-3 text-[12px] leading-relaxed text-[#c5d0c2] min-[851px]:flex-row min-[851px]:items-center min-[851px]:justify-between">
+          <p className="shrink-0">© 2026 Swastik Realty Group. All rights reserved.</p>
+          <p className="flex flex-col gap-1 min-[851px]:flex-row min-[851px]:gap-4">
+            <span className="text-[#e7efe4]">Codename: The Hidden Forest</span>
+            <span>Project details have not been disclosed.</span>
+          </p>
+          <p className="shrink-0">
+            <Link to="/privacy-policy" className="underline underline-offset-4 hover:text-[#f4ead7]">
+              Privacy note
+            </Link>
+          </p>
+        </div>
       </footer>
     </main>
   );
