@@ -107,9 +107,10 @@ export default function HiddenForestPoster() {
         </div>
 
         <form
+          id="early-updates"
           onSubmit={onSubmit}
           noValidate
-          className="poster-serif w-full max-w-[420px] bg-[#f8f4ea] px-7 py-8 text-[#1b261d] shadow-[0_24px_60px_rgba(0,0,0,0.35)] max-[1023px]:mx-auto sm:px-9 sm:py-9 short:py-6 tiny:py-5"
+          className="poster-serif w-full max-w-[420px] scroll-mt-[100px] bg-[#f8f4ea] px-7 py-8 text-[#1b261d] shadow-[0_24px_60px_rgba(0,0,0,0.35)] max-[1023px]:mx-auto sm:px-9 sm:py-9 short:py-6 tiny:py-5"
         >
           <h2 className="text-[clamp(30px,2.8vw,38px)] leading-[1.05] tracking-[-0.02em] short:text-[30px] tiny:text-[26px]">
             Get the next

@@ -19,6 +19,51 @@ const seo = {
   path: "/dear-pune",
 };
 
+const chapters = [
+  {
+    number: "01",
+    title: "Dear Pune",
+    text: "A series of letters to the places, memories and everyday moments that make Pune feel like Pune.",
+  },
+  {
+    number: "02",
+    title: "The Unsent Letter",
+    text: "One letter remained unopened. A promise that another story was waiting for its moment.",
+  },
+  {
+    number: "03",
+    title: "The Hidden Forest",
+    text: "The codename is here. The full reveal is still to come. Join the list to hear what happens next.",
+    warm: true,
+  },
+];
+
+const upcoming = ["04", "05", "06"];
+
+function ChapterCard({ number, title, text, warm, edged }) {
+  return (
+    <article
+      className={`py-8 min-[851px]:px-9 min-[851px]:py-1 ${
+        edged ? "border-t border-[#f4ead7]/20 min-[851px]:border-l min-[851px]:border-t-0" : "min-[851px]:pl-0"
+      } ${number.endsWith("3") || number.endsWith("6") ? "min-[851px]:pr-1" : ""}`}
+    >
+      <p className="poster-serif text-[30px] font-normal leading-none tracking-[0.06em] text-[#f6efe2]">
+        {number}
+      </p>
+      <h3
+        className={`poster-serif mt-5 text-[clamp(26px,2.1vw,34px)] font-normal leading-[1.12] tracking-[-0.02em] ${
+          warm ? "text-[#e4c49a]" : "text-[#f4ead7]"
+        }`}
+      >
+        {title}
+      </h3>
+      {text ? (
+        <p className="mt-4 max-w-[300px] text-[15px] leading-[1.55] text-[#d8cfbc]">{text}</p>
+      ) : null}
+    </article>
+  );
+}
+
 export default function DearPune() {
   useSeo(seo);
 
@@ -88,6 +133,69 @@ export default function DearPune() {
           <p className="ui mt-3 text-[9px] uppercase tracking-[0.2em] text-[#8b553b]">
             The clues were always there. The full story is still to come.
           </p>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[#1a4332] px-5 py-16 text-[#f4ead7] sm:px-[5vw] sm:py-20 xl:px-[76px]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_86%_38%,rgba(168,156,72,0.28),transparent_58%)]"
+        />
+        <div className="relative">
+          <p className="ui mb-6 text-[11px] font-bold uppercase tracking-[0.28em] text-[#cbb892]">
+            The story so far
+          </p>
+          <div className="grid items-center gap-8 min-[851px]:grid-cols-[1.15fr_0.85fr] min-[851px]:gap-12">
+            <h2 className="poster-serif max-w-[680px] text-[clamp(46px,5.4vw,78px)] font-normal leading-[0.94] tracking-[-0.03em] text-[#f6efe2]">
+              Three chapters.
+              <br />
+              One unfolding story.
+            </h2>
+            <div className="min-[851px]:justify-self-end min-[851px]:pt-2">
+              <p className="max-w-[420px] text-[15px] leading-[1.65] text-[#e7decc]">
+                From the city we know to a mystery we&apos;re not ready to explain.
+                <br />
+                Every chapter has led to this one.
+              </p>
+              <div className="mt-8 h-px w-full max-w-[420px] bg-[#c4784a]" />
+            </div>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 min-[851px]:mt-16 min-[851px]:grid-cols-3">
+            {chapters.map((chapter, index) => (
+              <ChapterCard key={chapter.number} {...chapter} edged={index > 0} />
+            ))}
+          </div>
+
+          <div className="mt-2 grid grid-cols-1 border-t border-[#f4ead7]/20 pt-2 min-[851px]:mt-10 min-[851px]:grid-cols-3 min-[851px]:pt-10">
+            {upcoming.map((number, index) => (
+              <ChapterCard key={number} number={number} title="Upcoming" edged={index > 0} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y-8 border-[#143026] bg-[#eadcc4] px-5 py-10 text-[#1f4a36] sm:px-[5vw] sm:py-12 xl:px-[76px]">
+        <div className="flex flex-col items-start justify-between gap-8 min-[851px]:flex-row min-[851px]:items-center">
+          <div>
+            <p className="ui mb-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8d4a32]">
+              The next chapter is coming
+            </p>
+            <h2 className="poster-serif text-[clamp(36px,4.2vw,62px)] font-normal leading-[1.02] tracking-[-0.03em]">
+              When the story opens,
+              <br />
+              <em className="font-normal text-[#b08474]">be there to read it.</em>
+            </h2>
+          </div>
+          <a
+            href="#early-updates"
+            className="ui inline-flex shrink-0 items-center gap-3 bg-[#8d4a32] px-6 py-4 text-[12px] font-bold uppercase tracking-[0.16em] text-[#f6efe2] transition hover:bg-[#a0563a]"
+          >
+            Get early updates
+            <span aria-hidden="true" className="text-[16px] font-normal">
+              ›
+            </span>
+          </a>
         </div>
       </section>
 
