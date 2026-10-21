@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import collage from "../assets/hidden-forest-collage.jpg";
-import logoMark from "../assets/logo-footer-dark.png";
+import DearPuneFooter from "../components/DearPuneFooter";
 import HiddenForestPoster from "../components/HiddenForestPoster";
 import ForestVideoBackground from "../components/ForestVideoBackground";
 import useSeo from "../hooks/useSeo";
@@ -42,10 +41,10 @@ const chapters = [
 
 const upcoming = ["04", "05"];
 
-function ChapterCard({ number, title, text, warm, edged }) {
+function ChapterCard({ number, title, text, warm, edged, compact }) {
   return (
     <article
-      className={`py-8 min-[851px]:px-9 min-[851px]:py-1 ${
+      className={`${compact ? "py-3" : "py-8"} min-[851px]:px-9 min-[851px]:py-4 ${
         edged ? "border-t border-[#f4ead7]/20 min-[851px]:border-l min-[851px]:border-t-0" : "min-[851px]:pl-0"
       } ${number.endsWith("3") || number.endsWith("6") ? "min-[851px]:pr-1" : ""}`}
     >
@@ -138,7 +137,7 @@ export default function DearPune() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#1a4332] px-5 py-16 text-[#f4ead7] sm:px-[5vw] sm:py-20 xl:px-[76px]">
+      <section className="relative overflow-hidden bg-[#1a4332] px-5 pb-0 pt-16 text-[#f4ead7] sm:px-[5vw] sm:pt-20 xl:px-[76px]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_86%_38%,rgba(168,156,72,0.28),transparent_58%)]"
@@ -169,15 +168,15 @@ export default function DearPune() {
             ))}
           </div>
 
-          <div className="mt-2 grid grid-cols-1 border-t border-[#f4ead7]/20 pt-2 min-[851px]:mt-10 min-[851px]:grid-cols-3 min-[851px]:pt-10">
+          <div className="mt-2 grid grid-cols-1 border-t border-[#f4ead7]/20 min-[851px]:mt-8 min-[851px]:grid-cols-3">
             {upcoming.map((number, index) => (
-              <ChapterCard key={number} number={number} title="Upcoming" edged={index > 0} />
+              <ChapterCard key={number} number={number} title="Upcoming" edged={index > 0} compact />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-y-8 border-[#143026] bg-[#eadcc4] px-5 py-10 text-[#1f4a36] sm:px-[5vw] sm:py-12 xl:px-[76px]">
+      <section className="border-y-8 border-[#143026] bg-[#eadcc4] px-5 py-8 text-[#1f4a36] sm:px-[5vw] sm:py-10 xl:px-[76px]">
         <div className="flex flex-col items-start justify-between gap-8 min-[851px]:flex-row min-[851px]:items-center">
           <div>
             <p className="ui mb-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8d4a32]">
@@ -220,33 +219,7 @@ export default function DearPune() {
         </p>
       </section>
 
-      <footer className="border-t border-[#eadcc4] bg-[#10281c] px-5 py-10 text-[#d5ddd0] sm:px-[5vw] sm:py-12 xl:px-[76px]">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-          <div className="w-fit bg-[#f8ebd6] px-3 py-2.5">
-            <img
-              src={logoMark}
-              alt="Swastik Realty Group"
-              className="h-16 w-auto sm:h-[76px]"
-            />
-          </div>
-          <p className="poster-serif text-[clamp(28px,3.1vw,42px)] font-normal italic leading-none tracking-[-0.02em] text-[#e6d3a1]">
-            With love, to a city called Pune.
-          </p>
-        </div>
-        <div className="my-8 h-px bg-[#f4ead7]/25" />
-        <div className="ui flex flex-col gap-3 text-[12px] leading-relaxed text-[#c5d0c2] min-[851px]:flex-row min-[851px]:items-center min-[851px]:justify-between">
-          <p className="shrink-0">© 2026 Swastik Realty Group. All rights reserved.</p>
-          <p className="flex flex-col gap-1 min-[851px]:flex-row min-[851px]:gap-4">
-            <span className="text-[#e7efe4]">Codename: The Hidden Forest</span>
-            <span>Project details have not been disclosed.</span>
-          </p>
-          <p className="shrink-0">
-            <Link to="/privacy-policy" className="underline underline-offset-4 hover:text-[#f4ead7]">
-              Privacy note
-            </Link>
-          </p>
-        </div>
-      </footer>
+      <DearPuneFooter />
     </main>
   );
 }

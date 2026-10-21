@@ -11,7 +11,7 @@ function upsert(selector, create) {
   return { node, existed, previous };
 }
 
-export default function useSeo({ title, description, keywords, image, path }) {
+export default function useSeo({ title, description, keywords, image, path, robots = "index, follow" }) {
   useEffect(() => {
     const previousTitle = document.title;
     document.title = title;
@@ -22,7 +22,7 @@ export default function useSeo({ title, description, keywords, image, path }) {
     const metas = [
       ["name", "description", description],
       ["name", "keywords", keywords?.join(", ")],
-      ["name", "robots", "index, follow"],
+      ["name", "robots", robots],
       ["property", "og:type", "website"],
       ["property", "og:site_name", "Swastik Realty Group"],
       ["property", "og:title", title],
@@ -60,5 +60,5 @@ export default function useSeo({ title, description, keywords, image, path }) {
         else node.setAttribute("content", previous);
       });
     };
-  }, [title, description, keywords, image, path]);
+  }, [title, description, keywords, image, path, robots]);
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import forest from "../assets/hidden-forest.jpg";
 import { submitLead } from "../lib/submitLead";
 
@@ -13,6 +14,7 @@ const labelClass =
 const fieldGap = "mt-5 short:mt-4 tiny:mt-3";
 
 export default function HiddenForestPoster() {
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("idle");
@@ -49,27 +51,25 @@ export default function HiddenForestPoster() {
         mobile: form.mobile,
         email: form.email.trim(),
         consent: String(form.consent),
-        source: "Hero form",
+        source: "Dear Pune — The Hidden Forest",
       });
-      setStatus("sent");
-      setMessage("Thank you — you're first in line.");
-      setForm(initialForm);
-    } catch {
-      fail("Something went wrong. Please try again.");
+      navigate("/dear-pune/thank-you", { state: { submitted: true, source: "dear-pune" } });
+    } catch (error) {
+      fail(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     }
   };
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#071b13] min-[1024px]:h-[calc(100svh-84px)] min-[1024px]:min-h-[460px]">
+    <section className="relative isolate bg-[#071b13]">
       <img
         src={forest}
         alt="A kingfisher flying over lush forest at The Hidden Forest, a nature-inspired residential project in Pune"
-        className="absolute inset-x-0 top-0 -z-20 w-full object-cover object-[60%_center] max-[1023px]:aspect-[16/9] min-[1024px]:inset-0 min-[1024px]:h-full"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[calc(100svh-84px)] w-full object-cover object-[center_32%] min-[1024px]:object-[60%_center]"
       />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,16,10,0.85)_0%,rgba(4,16,10,0.6)_30%,rgba(4,16,10,0.1)_55%,rgba(4,16,10,0.15)_100%)] max-[1023px]:bg-[linear-gradient(180deg,rgba(7,27,19,0)_0%,rgba(7,27,19,0.1)_30vw,#071b13_58vw,#071b13_100%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[calc(100svh-84px)] w-full bg-[linear-gradient(180deg,rgba(7,27,19,0.12)_0%,rgba(7,27,19,0.08)_42%,rgba(7,27,19,0.72)_78%,#071b13_100%)] min-[1024px]:bg-[linear-gradient(90deg,rgba(4,16,10,0.85)_0%,rgba(4,16,10,0.6)_30%,rgba(4,16,10,0.1)_55%,rgba(4,16,10,0.15)_100%)]" />
 
-      <div className="mx-auto grid w-full max-w-[1440px] items-center gap-12 px-5 pb-14 pt-[46vw] sm:px-[6vw] min-[1024px]:h-full min-[1024px]:grid-cols-[minmax(0,1fr)_400px] min-[1024px]:py-10 xl:grid-cols-[minmax(0,1fr)_430px] short:py-5 tiny:py-3">
-        <div className="poster-serif flex flex-col text-[#f7efe2] min-[1024px]:h-full min-[1024px]:justify-between">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1440px] items-center gap-8 px-5 pb-14 sm:px-[6vw] min-[1024px]:h-[calc(100svh-84px)] min-[1024px]:min-h-[460px] min-[1024px]:grid-cols-[minmax(0,1fr)_400px] min-[1024px]:gap-12 min-[1024px]:py-10 xl:grid-cols-[minmax(0,1fr)_430px] short:py-5 tiny:py-3">
+        <div className="poster-serif flex min-h-[calc(100svh-84px)] flex-col justify-end pb-6 text-[#f7efe2] min-[1024px]:h-full min-[1024px]:min-h-0 min-[1024px]:justify-between min-[1024px]:pb-0">
           <div className="min-[1024px]:mt-[3vh]">
             <p className="ui flex items-center gap-4 text-[11px] uppercase tracking-[0.28em] text-[#e2cfa2] tiny:text-[10px]">
               <span className="h-px w-12 bg-[#e2cfa2]/70" />

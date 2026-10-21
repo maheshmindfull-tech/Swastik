@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Journey from "./components/Journey";
 import DearPune from "./pages/DearPune";
+import HiddenForestThankYou from "./pages/HiddenForestThankYou";
 import Home from "./pages/Home";
 
 function ScrollToTop() {
@@ -32,7 +33,7 @@ function InnerPage() {
 
 export default function App() {
   const { pathname } = useLocation();
-  const campaign = pathname === "/dear-pune";
+  const campaign = pathname === "/dear-pune" || pathname.startsWith("/dear-pune/");
 
   return (
     <div className="overflow-x-hidden bg-[#FFFCF5]">
@@ -41,6 +42,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dear-pune" element={<DearPune />} />
+        <Route path="/dear-pune/thank-you" element={<HiddenForestThankYou />} />
         <Route path="*" element={<InnerPage />} />
       </Routes>
       {!campaign && <Journey />}
