@@ -48,8 +48,8 @@ export default function HiddenForestThankYou() {
   }, [source, submitted]);
 
   return (
-    <main className="dear-pune bg-[#f6efe2] pt-16 text-[#30291f] md:pt-[84px]">
-      <section className="grid min-h-[calc(100svh-4rem)] grid-rows-[minmax(280px,46vh)_auto] md:h-[calc(100svh-84px)] md:min-h-[560px] md:grid-cols-[minmax(340px,0.9fr)_minmax(0,1.1fr)] md:grid-rows-1">
+    <main className="dear-pune bg-[#f6efe2] pt-[var(--site-header,63px)] text-[#30291f] md:pt-[var(--site-header,84px)]">
+      <section className="-mt-px grid min-h-[calc(100svh-var(--site-header,63px))] grid-rows-[minmax(280px,46vh)_auto] md:h-[calc(100svh-var(--site-header,84px))] md:min-h-[560px] md:grid-cols-[minmax(340px,0.9fr)_minmax(0,1.1fr)] md:grid-rows-1">
         <div className="order-2 flex flex-col justify-center px-5 py-8 sm:px-10 md:order-1 md:px-[4.5vw] md:py-10">
           <p className="ui flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#86704f]">
             <span className="h-px w-8 bg-[#a89065]" />

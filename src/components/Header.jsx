@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { logo } from "../assets/images";
 import { navLinks, solidHeaderPaths } from "../data";
@@ -9,6 +9,22 @@ export default function Header() {
   const { pathname } = useLocation();
   const solid = solidHeaderPaths.includes(pathname);
   const forestPage = pathname === "/dear-pune" || pathname.startsWith("/dear-pune/");
+
+  useLayoutEffect(() => {
+    const node = document.querySelector("header");
+    if (!node) return undefined;
+    const apply = () => {
+      document.documentElement.style.setProperty("--site-header", `${node.getBoundingClientRect().height}px`);
+    };
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(node);
+    window.addEventListener("resize", apply);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", apply);
+    };
+  }, [pathname, open]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);

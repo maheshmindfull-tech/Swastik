@@ -6,6 +6,7 @@ import Journey from "./components/Journey";
 import DearPune from "./pages/DearPune";
 import HiddenForestThankYou from "./pages/HiddenForestThankYou";
 import Home from "./pages/Home";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/dear-pune" element={<DearPune />} />
         <Route path="/dear-pune/thank-you" element={<HiddenForestThankYou />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="*" element={<InnerPage />} />
       </Routes>
       {!campaign && <Journey />}
