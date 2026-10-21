@@ -2,6 +2,21 @@ const SHEET_URL = import.meta.env.VITE_GOOGLE_SHEET_URL;
 const NOTIFY_EMAIL = "swastikrealtygroup0711@gmail.com";
 
 export async function submitLead(fields) {
+  // Fire Google Sheet webhook in parallel if configured
+  const sheetPromise = (async () => {
+    if (!SHEET_URL) return;
+    try {
+      const body = new URLSearchParams({
+        ...fields,
+        page: window.location.href,
+        submittedAt: new Date().toISOString(),
+      });
+      await fetch(SHEET_URL, { method: "POST", mode: "no-cors", body });
+    } catch {
+      // Ignore sheet errors so form completion is not blocked
+    }
+  })();
+
   const payload = {
     name: fields.name || "",
     mobile: fields.mobile || "",
@@ -16,7 +31,7 @@ export async function submitLead(fields) {
 
   if (fields.email) payload._replyto = fields.email;
 
-  const response = await fetch(
+  const emailPromise = fetch(
     `https://formsubmit.co/ajax/${encodeURIComponent(NOTIFY_EMAIL)}`,
     {
       method: "POST",
@@ -27,6 +42,8 @@ export async function submitLead(fields) {
       body: JSON.stringify(payload),
     },
   );
+
+  const [response] = await Promise.all([emailPromise, sheetPromise]);
 
   let data = {};
   try {
@@ -44,18 +61,5 @@ export async function submitLead(fields) {
       );
     }
     throw new Error(detail || "Could not send your details. Please try again.");
-  }
-
-  if (SHEET_URL) {
-    const body = new URLSearchParams({
-      ...fields,
-      page: window.location.href,
-      submittedAt: new Date().toISOString(),
-    });
-    try {
-      await fetch(SHEET_URL, { method: "POST", mode: "no-cors", body });
-    } catch {
-      // The enquiry email has already been sent.
-    }
   }
 }

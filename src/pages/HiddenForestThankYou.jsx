@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import letterImage from "../assets/hidden-forest-letter.webp";
+import DearPuneFooter from "../components/DearPuneFooter";
 import useSeo from "../hooks/useSeo";
 
 const seo = {
@@ -17,17 +18,6 @@ export default function HiddenForestThankYou() {
   const location = useLocation();
   const submitted = location.state?.submitted === true;
   const source = location.state?.source || "dear-pune";
-
-  useEffect(() => {
-    const previousHtml = document.documentElement.style.overflow;
-    const previousBody = document.body.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.documentElement.style.overflow = previousHtml;
-      document.body.style.overflow = previousBody;
-    };
-  }, []);
 
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
@@ -58,9 +48,9 @@ export default function HiddenForestThankYou() {
   }, [source, submitted]);
 
   return (
-    <main className="dear-pune fixed inset-x-0 bottom-0 top-[84px] overflow-hidden bg-[#f6efe2] text-[#30291f]">
-      <section className="grid h-full grid-rows-[minmax(0,42%)_minmax(0,1fr)] min-[900px]:grid-cols-[minmax(0,1fr)_minmax(300px,0.92fr)] min-[900px]:grid-rows-1">
-        <div className="order-2 flex min-h-0 flex-col justify-center overflow-hidden px-5 py-[2vh] sm:px-10 min-[900px]:order-1 min-[900px]:px-[4.5vw]">
+    <main className="dear-pune bg-[#f6efe2] pt-16 text-[#30291f] md:pt-[84px]">
+      <section className="grid min-h-[calc(100svh-4rem)] grid-rows-[minmax(280px,46vh)_auto] md:h-[calc(100svh-84px)] md:min-h-[560px] md:grid-cols-[minmax(340px,0.9fr)_minmax(0,1.1fr)] md:grid-rows-1">
+        <div className="order-2 flex flex-col justify-center px-5 py-8 sm:px-10 md:order-1 md:px-[4.5vw] md:py-10">
           <p className="ui flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#86704f]">
             <span className="h-px w-8 bg-[#a89065]" />
             The next letter
@@ -96,14 +86,18 @@ export default function HiddenForestThankYou() {
           </div>
         </div>
 
-        <div className="order-1 min-h-0 bg-[#1c2b20] min-[900px]:order-2">
+        <div className="relative order-1 min-h-[280px] md:order-2 md:min-h-0">
           <img
             src={letterImage}
-            alt="The Hidden Forest letter, sealed in the forest, with a kingfisher beside it"
-            className="h-full w-full object-contain object-center"
+            alt="A sealed letter from The Hidden Forest, with a kingfisher beside it"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
+          <p className="poster-serif absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#102018]/75 to-transparent px-6 pb-6 pt-16 text-center text-[clamp(20px,2vw,32px)] italic leading-snug text-[#f7f1e4] sm:pb-8">
+            Some stories are worth waiting for.
+          </p>
         </div>
       </section>
+      <DearPuneFooter />
     </main>
   );
 }
