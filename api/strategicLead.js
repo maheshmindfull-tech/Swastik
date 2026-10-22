@@ -119,9 +119,9 @@ export async function createStrategicLead(input) {
     location: "Pune",
     comments: "Website enquiry. Consented to be contacted.",
     source: "Website",
-    sourceName: "Dear Pune",
-    sourceDescription: "Dear Pune — The Hidden Forest",
-    project: "The Hidden Forest",
+    sourceName: "Website The Hidden Forest",
+    sourceDescription: "/ Website The Hidden Forest / 01/10/2026 / 31/03/2027",
+    project: "Swastik Vantara",
   });
   if (!saved.success && saved.message === "Something went wrong. Please try again.") {
     return { ...saved, message: "Could not save your enquiry. Please try again." };
