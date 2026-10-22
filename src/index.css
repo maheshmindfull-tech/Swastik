@@ -35,6 +35,16 @@
   font-family: Fraunces, Georgia, "Times New Roman", serif;
 }
 
+.contact-offset {
+  margin-top: calc(var(--site-header, 64px) + 43px);
+}
+
+@media (min-width: 768px) {
+  .contact-offset {
+    margin-top: var(--site-header, 84px);
+  }
+}
+
 @media (max-width: 1023px) {
   .poster-legible {
     text-shadow:

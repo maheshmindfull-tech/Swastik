@@ -27,7 +27,6 @@ export const navLinks = [
   { name: "PROJECTS", path: "/projects" },
   { name: "GALLERY", path: "/gallery" },
   { name: "CAREER", path: "/career" },
-  { name: "DEAR PUNE", path: "/dear-pune" },
 ];
 
 export const solidHeaderPaths = [

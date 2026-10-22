@@ -6,6 +6,7 @@ import Journey from "./components/Journey";
 import DearPune from "./pages/DearPune";
 import HiddenForestThankYou from "./pages/HiddenForestThankYou";
 import Home from "./pages/Home";
+import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function ScrollToTop() {
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/dear-pune" element={<DearPune />} />
         <Route path="/dear-pune/thank-you" element={<HiddenForestThankYou />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<InnerPage />} />
       </Routes>
       {!campaign && <Journey />}
