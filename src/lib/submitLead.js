@@ -43,13 +43,38 @@ export async function submitLead(fields) {
     },
   );
 
-  const [response] = await Promise.all([emailPromise, sheetPromise]);
+  const erpPromise = fetch("/api/lead", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      name: fields.name || "",
+      mobile: fields.mobile || "",
+      email: fields.email || "",
+      consent: fields.consent === "true" || fields.consent === true,
+      source: fields.source || "",
+    }),
+  });
+
+  const [response, erpResponse] = await Promise.all([emailPromise, erpPromise, sheetPromise]);
 
   let data = {};
   try {
     data = await response.json();
   } catch {
     data = {};
+  }
+
+  let erp = {};
+  try {
+    erp = await erpResponse.json();
+  } catch {
+    erp = {};
+  }
+  if (!erpResponse.ok || erp.success !== true) {
+    throw new Error(erp.message || "Could not save your enquiry. Please try again.");
   }
 
   const delivered = response.ok && (data.success === true || data.success === "true");
