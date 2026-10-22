@@ -38,7 +38,8 @@ export default function HiddenForestPoster() {
     event.preventDefault();
     if (!form.name.trim()) return fail("Please enter your name.");
     if (!/^[6-9]\d{9}$/.test(form.mobile)) return fail("Enter a valid 10-digit mobile number.");
-    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    if (!form.email.trim()) return fail("Please enter your email address.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
       return fail("Enter a valid email address.");
     }
     if (!form.consent) return fail("Please tick the box to agree to be contacted.");
@@ -154,9 +155,9 @@ export default function HiddenForestPoster() {
           </label>
 
           <label className={`${labelClass} ${fieldGap}`}>
-            Email{" "}
-            <span className="font-normal normal-case tracking-normal text-[#8a8478]">(optional)</span>
+            Email
             <input
+              required
               type="email"
               autoComplete="email"
               value={form.email}
@@ -168,7 +169,7 @@ export default function HiddenForestPoster() {
 
           <label className="ui mt-6 flex items-start gap-3 text-[11.5px] leading-[1.5] text-[#5b5a52] short:mt-4 short:text-[11px]">
             <input
-              required
+              required={true}
               type="checkbox"
               checked={form.consent}
               onChange={update("consent")}

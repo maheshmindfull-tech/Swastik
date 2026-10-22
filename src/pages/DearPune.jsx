@@ -44,17 +44,15 @@ const upcoming = ["04", "05"];
 function ChapterCard({ number, title, text, warm, edged, compact }) {
   return (
     <article
-      className={`${compact ? "py-3" : "py-8"} min-[851px]:px-9 min-[851px]:py-4 ${
-        edged ? "border-t border-[#f4ead7]/20 min-[851px]:border-l min-[851px]:border-t-0" : "min-[851px]:pl-0"
-      } ${number.endsWith("3") || number.endsWith("6") ? "min-[851px]:pr-1" : ""}`}
+      className={`${compact ? "py-3" : "py-8"} min-[851px]:px-9 min-[851px]:py-4 ${edged ? "border-t border-[#f4ead7]/20 min-[851px]:border-l min-[851px]:border-t-0" : "min-[851px]:pl-0"
+        } ${number.endsWith("3") || number.endsWith("6") ? "min-[851px]:pr-1" : ""}`}
     >
       <p className="poster-serif text-[30px] font-normal leading-none tracking-[0.06em] text-[#f6efe2]">
         {number}
       </p>
       <h3
-        className={`poster-serif mt-5 text-[clamp(26px,2.1vw,34px)] font-normal leading-[1.12] tracking-[-0.02em] ${
-          warm ? "text-[#e4c49a]" : "text-[#f4ead7]"
-        }`}
+        className={`poster-serif mt-5 text-[clamp(26px,2.1vw,34px)] font-normal leading-[1.12] tracking-[-0.02em] ${warm ? "text-[#e4c49a]" : "text-[#f4ead7]"
+          }`}
       >
         {title}
       </h3>
@@ -109,7 +107,7 @@ export default function DearPune() {
               open, and every day offers a refreshing change of pace.
             </p>
             <p className="font-bold text-[#14251b]">
-              Introducing a new nature-inspired residential experience in Pune.
+              Introducing a new nature inspired residential experience in Pune.
             </p>
             <p>
               Thoughtfully envisioned for those who seek more than just a home,
