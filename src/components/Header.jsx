@@ -58,6 +58,14 @@ export default function Header() {
         className="fixed top-0 left-0 w-full z-50 transition-all duration-300"
         style={{ backgroundColor }}
       >
+        {forestPage ? (
+          <nav className="flex items-center justify-center px-4 py-3 md:py-5">
+            <Link to="/">
+              <img alt="Logo" className="w-32 cursor-pointer sm:w-36 md:w-40 xl:w-44" src={logo} />
+            </Link>
+          </nav>
+        ) : (
+          <>
         <nav className="flex md:hidden items-center justify-between px-4 py-3">
           <button
             onClick={() => setOpen((value) => !value)}
@@ -117,9 +125,11 @@ export default function Header() {
             </button>
           </Link>
         </nav>
+          </>
+        )}
       </header>
 
-      <div
+      {!forestPage && <div
         className={`fixed inset-0 bg-[#6A2915] z-40 md:hidden transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
@@ -144,7 +154,7 @@ export default function Header() {
             </button>
           </Link>
         </div>
-      </div>
+      </div>}
     </>
   );
 }
