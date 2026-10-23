@@ -17,6 +17,7 @@ const emptyForm = {
 };
 
 const fieldClass = "w-full bg-[#F5F1ED] p-2 text-sm text-[#260F01] sm:p-3";
+const OWNER_EMAIL = "swastikrealtygroup0711@gmail.com";
 
 export default function Contact() {
   const [form, setForm] = useState(emptyForm);
@@ -36,16 +37,47 @@ export default function Contact() {
     if (status === "sending") return;
     setStatus("sending");
     setNotice("");
+    const name = `${form.firstName} ${form.lastName}`.trim();
     try {
-      const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ form: "contact", ...form }),
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok || data.success !== true) {
+      const [emailResponse, leadResponse] = await Promise.all([
+        fetch(`https://formsubmit.co/ajax/${encodeURIComponent(OWNER_EMAIL)}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            name,
+            email: form.email,
+            phone: form.phone || "Not provided",
+            subject: form.subject,
+            message: form.message,
+            _replyto: form.email,
+            _subject: `Website contact from ${name}`,
+            _template: "table",
+            _captcha: "false",
+          }),
+        }),
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ form: "contact", ...form }),
+        }),
+      ]);
+      const emailData = await emailResponse.json().catch(() => ({}));
+      const leadData = await leadResponse.json().catch(() => ({}));
+      const emailed = emailResponse.ok && (emailData.success === true || emailData.success === "true");
+      const saved = leadResponse.ok && leadData.success === true;
+      if (!emailed) {
+        const detail = typeof emailData.message === "string" ? emailData.message : "";
         setStatus("error");
-        setNotice(data.message || "Something went wrong. Please try again.");
+        setNotice(
+          /activation/i.test(detail)
+            ? "One-time email activation is still pending. Open swastikrealtygroup0711@gmail.com, click Activate Form, then submit again."
+            : "Something went wrong. Please try again.",
+        );
+        return;
+      }
+      if (!saved) {
+        setStatus("error");
+        setNotice(leadData.message || "Something went wrong. Please try again.");
         return;
       }
       setStatus("success");
