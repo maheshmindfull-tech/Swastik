@@ -11,6 +11,10 @@ import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetail from "./pages/ProjectDetail";
+import GalleryPage from "./pages/Gallery";
+import Career from "./pages/Career";
+import Disclaimer from "./pages/Disclaimer";
+import Terms from "./pages/Terms";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -53,6 +57,10 @@ export default function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/career" element={<Career />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
+        <Route path="/terms-and-conditions" element={<Terms />} />
         <Route path="*" element={<InnerPage />} />
       </Routes>
       {!campaign && <Journey />}

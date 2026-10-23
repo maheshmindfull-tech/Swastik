@@ -21,24 +21,26 @@ export default function PrivacyPolicy() {
   });
 
   return (
-    <main>
-      <section className="flex flex-col gap-4 bg-[#6A2915] px-6 pt-[calc(var(--site-header,84px)+3.5rem)] pb-14 text-white md:px-20">
+    <div>
+      <div className="mt-13 flex flex-col gap-4 bg-[#6A2915] px-6 py-14 text-white sm:mt-14 md:mt-15 md:px-20 lg:mt-22 xl:mt-15">
         <h1 className="text-4xl">Privacy policy</h1>
         <div className="h-1 w-60 rounded-full bg-[#D9D9D9]" />
         <p>Build your future with Swastik</p>
-      </section>
-      <section className="min-h-[50vh] bg-[#f4f1ea] px-6 py-14 md:px-20">
-        {sections.map((section, index) => (
-          <div key={index} className="mb-10">
-            <h2 className="mb-3 text-xl font-semibold text-gray-800">{section.title}</h2>
-            <ul className="list-disc space-y-2 pl-7 text-lg leading-relaxed text-gray-700">
-              {section.points.map((point, pointIndex) => (
-                <li key={pointIndex}>{point}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </section>
-    </main>
+      </div>
+      <div className="min-h-screen bg-[#f4f1ea]">
+        <div className="flex flex-col gap-4 px-6 py-14 md:px-20">
+          {sections.map((section, index) => (
+            <div key={index} className="mb-10">
+              <h2 className="mb-3 text-xl font-semibold text-gray-800">{section.title}</h2>
+              <ul className="list-disc space-y-2 pl-7 text-lg leading-relaxed text-gray-700">
+                {section.points.map((point, pointIndex) => (
+                  <li key={pointIndex}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
