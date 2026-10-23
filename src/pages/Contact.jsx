@@ -5,6 +5,7 @@ import phoneIcon from "../assets/contact/phone.png";
 import sendIcon from "../assets/contact/send.png";
 import timeIcon from "../assets/contact/time.png";
 import useSeo from "../hooks/useSeo";
+import { contactSeo } from "../seo";
 
 const emptyForm = {
   firstName: "",
@@ -21,12 +22,7 @@ export default function Contact() {
   const [form, setForm] = useState(emptyForm);
   const [status, setStatus] = useState("");
 
-  useSeo({
-    title: "Contact Us | Swastik Realty Group",
-    description:
-      "We're here to help you find your dream property. Visit, call, or message Swastik Realty Group in Pimpri-Chinchwad.",
-    path: "/contact",
-  });
+  useSeo(contactSeo);
 
   const update = (event) => {
     const { name, value } = event.target;

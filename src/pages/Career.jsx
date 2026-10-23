@@ -1,5 +1,6 @@
 import teamPhoto from "../assets/career/team.png";
 import useSeo from "../hooks/useSeo";
+import { careerSeo } from "../seo";
 
 const jobs = [
   {
@@ -40,11 +41,7 @@ const applyUrl =
   "https://26.strategicerpcloud.com/strategicerp/pages/webgeneratedhtml/980-oCF7Vd1iBYwqoLTp.html";
 
 export default function Career() {
-  useSeo({
-    title: "Career | Swastik Realty Group",
-    description: "Build your future with Swastik",
-    path: "/career",
-  });
+  useSeo(careerSeo);
 
   return (
     <div>

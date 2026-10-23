@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import { aboutImages, awards, leaders, milestones, teamSlides } from "../data/about";
 import useSeo from "../hooks/useSeo";
+import { aboutSeo } from "../seo";
 
 export default function About() {
-  useSeo({
-    title: "About Us | Swastik Realty Group",
-    description:
-      "Building homes with purpose, integrity, and long-term value. Learn about Swastik Realty Group, our vision, milestones, and leadership.",
-    path: "/about",
-  });
+  useSeo(aboutSeo);
 
   return (
     <>

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { galleryAlbums, galleryYears } from "../data/gallery";
 import useSeo from "../hooks/useSeo";
+import { gallerySeo } from "../seo";
 
 export default function GalleryPage() {
   const [filter, setFilter] = useState("all");
@@ -9,11 +10,7 @@ export default function GalleryPage() {
   const [preview, setPreview] = useState({ open: false, items: [], index: 0 });
   const playing = useRef(null);
 
-  useSeo({
-    title: "Gallery | Swastik Realty Group",
-    description: "Discover our portfolio of exceptional properties that redefine luxury living",
-    path: "/gallery",
-  });
+  useSeo(gallerySeo);
 
   const show = (items, index) => setPreview({ open: true, items, index });
 

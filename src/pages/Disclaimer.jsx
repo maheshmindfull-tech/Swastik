@@ -1,4 +1,5 @@
 import useSeo from "../hooks/useSeo";
+import { disclaimerSeo } from "../seo";
 
 const sections = [
   {
@@ -28,11 +29,7 @@ const sections = [
 ];
 
 export default function Disclaimer() {
-  useSeo({
-    title: "Disclaimer | Swastik Realty Group",
-    description: "Build your future with Swastik",
-    path: "/disclaimer",
-  });
+  useSeo(disclaimerSeo);
 
   return (
     <div>

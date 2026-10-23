@@ -88,7 +88,7 @@ export default function Header() {
             />
           </button>
           <Link to="/">
-            <img alt="Logo" className="w-32 sm:w-36 cursor-pointer" src={logo} />
+            <img alt="Logo" className="w-24 cursor-pointer sm:w-28" src={logo} />
           </Link>
           <Link to="/contact">
             <button className="font-medium rounded-full px-3 py-1.5 text-[10px] sm:text-xs bg-white text-black hover:bg-gray-200 transition whitespace-nowrap">
@@ -98,12 +98,9 @@ export default function Header() {
         </nav>
 
         <nav className="hidden md:flex items-center justify-between px-6 lg:px-16 xl:px-24 py-4 lg:py-5 relative">
-          <div className="flex items-center gap-3 lg:gap-4 xl:gap-5 text-white font-light text-[11px] lg:text-xs xl:text-[13px]">
+          <div className="flex items-center gap-4 text-xs font-light text-white lg:gap-6 lg:text-sm xl:gap-8">
             {navLinks.map((link) => {
-              const active =
-                link.path === "/"
-                  ? pathname === "/"
-                  : pathname === link.path || pathname.startsWith(`${link.path}/`);
+              const active = pathname === link.path;
               return (
                 <Link
                   key={link.name}
@@ -139,10 +136,7 @@ export default function Header() {
       >
         <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
           {navLinks.map((link) => {
-            const active =
-              link.path === "/"
-                ? pathname === "/"
-                : pathname === link.path || pathname.startsWith(`${link.path}/`);
+            const active = pathname === link.path;
             return (
               <Link
                 key={link.name}

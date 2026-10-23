@@ -1,4 +1,5 @@
 import useSeo from "../hooks/useSeo";
+import { privacySeo } from "../seo";
 
 const points = [
   "is built on a simple yet powerful belief—real estate is not just about structures, but about stories.",
@@ -13,12 +14,7 @@ const sections = Array.from({ length: 9 }, () => ({
 }));
 
 export default function PrivacyPolicy() {
-  useSeo({
-    title: "Privacy Policy | Swastik Realty Group",
-    description:
-      "Swastik Realty Group is built on trust, transparency, and togetherness. Read how we think about the stories behind every home.",
-    path: "/privacy-policy",
-  });
+  useSeo(privacySeo);
 
   return (
     <div>

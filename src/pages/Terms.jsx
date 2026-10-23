@@ -1,4 +1,5 @@
 import useSeo from "../hooks/useSeo";
+import { termsSeo } from "../seo";
 
 const sections = [
   {
@@ -26,11 +27,7 @@ const sections = [
 ];
 
 export default function TermsandConditions() {
-  useSeo({
-    title: "Terms and Conditions | Swastik Realty Group",
-    description: "Build your future with Swastik",
-    path: "/terms-and-conditions",
-  });
+  useSeo(termsSeo);
 
   return (
     <div>

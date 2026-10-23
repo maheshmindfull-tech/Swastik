@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Welcome from "../components/Welcome";
 import Testimonials from "../components/Testimonials";
+import { projectList } from "../data/projectList";
 import { highlightAssets, projectDetails } from "../data/projectDetails";
 import useSeo from "../hooks/useSeo";
+import { projectSeo } from "../seo";
 
 const highlights = [
   { title: "Prime Location", bg: highlightAssets.locationBg, img: highlightAssets.pin },
@@ -18,11 +20,17 @@ export default function ProjectDetail() {
   const { projectId } = useParams();
   const project = projectDetails.find((item) => item.id === projectId);
 
-  useSeo({
-    title: project ? `${project.name} | Swastik Realty Group` : "Project | Swastik Realty Group",
-    description: project?.desc || "Explore Swastik Realty Group projects in Pune.",
-    path: `/projects/${projectId}`,
-  });
+  const place = projectList.find((item) => item.id === projectId)?.location || "Pune";
+  useSeo(
+    project
+      ? projectSeo(project, place)
+      : {
+          title: "Project not found | Swastik Realty Group",
+          description: "This Swastik Realty Group project page is not available. Browse residential projects in Pune.",
+          path: `/projects/${projectId}`,
+          robots: "noindex, follow",
+        },
+  );
 
   if (!project) {
     return <div className="px-6 pt-36 pb-20 text-center text-[#260F01]">Project not found</div>;

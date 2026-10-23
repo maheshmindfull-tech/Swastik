@@ -3,6 +3,7 @@ import DearPuneFooter from "../components/DearPuneFooter";
 import HiddenForestPoster from "../components/HiddenForestPoster";
 import ForestVideoBackground from "../components/ForestVideoBackground";
 import useSeo from "../hooks/useSeo";
+import { pageGraph } from "../seo";
 import forestImage from "../assets/hidden-forest.jpg";
 
 const seo = {
@@ -18,6 +19,16 @@ const seo = {
   ],
   image: forestImage,
   path: "/dear-pune",
+  jsonLd: pageGraph({
+    path: "/dear-pune",
+    title: "The Hidden Forest | Upcoming Residential Project in Pune",
+    description:
+      "The Hidden Forest is an upcoming residential project in Pune offering nature-inspired living — premium residences and homes surrounded by greenery.",
+    crumbs: [
+      { name: "Home", path: "/" },
+      { name: "The Hidden Forest", path: "/dear-pune" },
+    ],
+  }),
 };
 
 const chapters = [

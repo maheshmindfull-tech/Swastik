@@ -1,6 +1,8 @@
 {
-  "name": "The Hidden Forest - Swastik Realty Group",
+  "name": "Swastik Realty Group",
   "short_name": "Swastik",
+  "description": "Residential flats and homes in Pune and Pimpri-Chinchwad by Swastik Realty Group.",
+  "start_url": "/",
   "icons": [
     {
       "src": "/favicon-192x192.png",
@@ -13,7 +15,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#14251c",
-  "background_color": "#071b13",
+  "theme_color": "#6A2915",
+  "background_color": "#FFFCF5",
   "display": "standalone"
 }

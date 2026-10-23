@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /dear-pune/thank-you
+
+Sitemap: https://swastikrealtygroup.com/sitemap.xml
 
 User-agent: Googlebot
 Allow: /

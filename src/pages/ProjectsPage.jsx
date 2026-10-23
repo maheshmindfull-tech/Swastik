@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { projectList, projectTabs, upcomingImage } from "../data/projectList";
 import useSeo from "../hooks/useSeo";
+import { projectsSeoWithList } from "../seo";
 
 function Pin() {
   return (
@@ -29,12 +30,7 @@ export default function ProjectsPage() {
   const navigate = useNavigate();
   const visible = projectList.filter((project) => project.status === tab);
 
-  useSeo({
-    title: "Projects | Swastik Realty Group",
-    description:
-      "Explore ongoing, completed, and upcoming residential projects by Swastik Realty Group across Pune.",
-    path: "/projects",
-  });
+  useSeo(projectsSeoWithList(projectList));
 
   useEffect(() => {
     const next = searchParams.get("tab");
