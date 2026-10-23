@@ -60,9 +60,14 @@ export default function Header() {
       >
         {forestPage ? (
           <nav className="flex items-center justify-center px-4 py-3 md:py-5">
-            <Link to="/">
-              <img alt="Logo" className="w-32 cursor-pointer sm:w-36 md:w-40 xl:w-44" src={logo} />
-            </Link>
+            <button
+              type="button"
+              aria-label="Back to top"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+              className="cursor-pointer"
+            >
+              <img alt="Logo" className="w-32 sm:w-36 md:w-40 xl:w-44" src={logo} />
+            </button>
           </nav>
         ) : (
           <>

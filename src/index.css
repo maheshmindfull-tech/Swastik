@@ -35,6 +35,31 @@
   font-family: Fraunces, Georgia, "Times New Roman", serif;
 }
 
+@keyframes about-slide-in-right {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes about-slide-out-left {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-60px); }
+}
+
+@keyframes about-slide-in-left {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes about-slide-out-right {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(60px); }
+}
+
+.about-slide-in-right { animation: about-slide-in-right 0.5s ease forwards; }
+.about-slide-out-left { animation: about-slide-out-left 0.5s ease forwards; }
+.about-slide-in-left { animation: about-slide-in-left 0.5s ease forwards; }
+.about-slide-out-right { animation: about-slide-out-right 0.5s ease forwards; }
+
 .contact-offset {
   margin-top: calc(var(--site-header, 64px) + 43px);
 }

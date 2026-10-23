@@ -15,11 +15,15 @@ function leadApi() {
           return;
         }
 
-        const chunks = [];
-        for await (const chunk of req) chunks.push(chunk);
+        const raw = await new Promise((resolve, reject) => {
+          const chunks = [];
+          req.on("data", (chunk) => chunks.push(chunk));
+          req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+          req.on("error", reject);
+        });
         let body = {};
         try {
-          body = JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
+          body = JSON.parse(raw || "{}");
         } catch {
           res.statusCode = 400;
           res.setHeader("Content-Type", "application/json");

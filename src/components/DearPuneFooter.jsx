@@ -5,9 +5,14 @@ export default function DearPuneFooter() {
   return (
     <footer className="border-t border-[#eadcc4] bg-[#10281c] px-5 py-10 text-[#d5ddd0] sm:px-[5vw] sm:py-12 xl:px-[76px]">
       <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-        <Link to="/" aria-label="Swastik Realty Group" className="inline-block">
+        <button
+          type="button"
+          aria-label="Back to top"
+          onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+          className="inline-block cursor-pointer"
+        >
           <img src={logo} alt="Swastik Realty Group" className="h-14 w-auto sm:h-16" />
-        </Link>
+        </button>
         <p className="poster-serif text-[clamp(28px,3.1vw,42px)] font-normal italic leading-none tracking-[-0.02em] text-[#e6d3a1]">
           With love, to a city called Pune.
         </p>

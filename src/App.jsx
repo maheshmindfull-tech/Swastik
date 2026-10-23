@@ -6,8 +6,11 @@ import Journey from "./components/Journey";
 import DearPune from "./pages/DearPune";
 import HiddenForestThankYou from "./pages/HiddenForestThankYou";
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetail from "./pages/ProjectDetail";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -46,6 +49,9 @@ export default function App() {
         <Route path="/dear-pune" element={<DearPune />} />
         <Route path="/dear-pune/thank-you" element={<HiddenForestThankYou />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<InnerPage />} />
       </Routes>
