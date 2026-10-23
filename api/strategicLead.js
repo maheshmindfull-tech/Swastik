@@ -129,8 +129,65 @@ export async function createStrategicLead(input) {
   return saved;
 }
 
+const OWNER_EMAIL = "swastikrealtygroup0711@gmail.com";
+
 function clean(value, max) {
   return String(value ?? "").trim().replace(/\s+/g, " ").slice(0, max);
+}
+
+async function emailContactOwner({ firstName, lastName, email, phone, subject, message }) {
+  const name = `${firstName} ${lastName}`.trim();
+  const payload = {
+    name,
+    email,
+    phone: phone || "Not provided",
+    subject,
+    message,
+    _replyto: email,
+    _subject: `Website contact from ${name}`,
+    _template: "table",
+    _captcha: "false",
+  };
+
+  let last = { ok: false, activation: false };
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    last = await postOwnerEmail(payload);
+    if (last.ok || last.activation) return last;
+  }
+  return last;
+}
+
+async function postOwnerEmail(payload) {
+  let response;
+  try {
+    response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(OWNER_EMAIL)}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Origin: "https://swastikrealtygroup.com",
+        Referer: "https://swastikrealtygroup.com/contact",
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    return { ok: false, activation: false };
+  }
+
+  const raw = await response.text();
+  let data = {};
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    data = { message: raw };
+  }
+
+  const detail = typeof data.message === "string" ? data.message : raw;
+  const delivered = response.ok && (data.success === true || data.success === "true");
+  if (!delivered) {
+    console.error("Contact email was not delivered", response.status, detail.slice(0, 240));
+  }
+  return { ok: delivered, activation: /activation/i.test(detail) };
 }
 
 export async function createContactLead(input) {
@@ -152,6 +209,17 @@ export async function createContactLead(input) {
   }
   if (phone && !/^\d{1,10}$/.test(phone)) {
     return { status: 400, success: false, message: "Something went wrong. Please try again." };
+  }
+
+  const mailed = await emailContactOwner({ firstName, lastName, email, phone, subject, message });
+  if (!mailed.ok) {
+    return {
+      status: 502,
+      success: false,
+      message: mailed.activation
+        ? "One-time email activation is still pending. Open swastikrealtygroup0711@gmail.com, click Activate Form, then submit again."
+        : "Something went wrong. Please try again.",
+    };
   }
 
   const saved = await saveLead({

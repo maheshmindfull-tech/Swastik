@@ -21,6 +21,7 @@ const fieldClass = "w-full bg-[#F5F1ED] p-2 text-sm text-[#260F01] sm:p-3";
 export default function Contact() {
   const [form, setForm] = useState(emptyForm);
   const [status, setStatus] = useState("");
+  const [notice, setNotice] = useState("");
 
   useSeo(contactSeo);
 
@@ -32,7 +33,9 @@ export default function Contact() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    if (status === "sending") return;
     setStatus("sending");
+    setNotice("");
     try {
       const response = await fetch("/api/lead", {
         method: "POST",
@@ -42,12 +45,15 @@ export default function Contact() {
       const data = await response.json().catch(() => ({}));
       if (!response.ok || data.success !== true) {
         setStatus("error");
+        setNotice(data.message || "Something went wrong. Please try again.");
         return;
       }
       setStatus("success");
+      setNotice("Message sent successfully!");
       setForm(emptyForm);
     } catch {
       setStatus("error");
+      setNotice("Something went wrong. Please try again.");
     }
   };
 
@@ -169,17 +175,14 @@ export default function Contact() {
                   />
                 </div>
                 {status === "success" && (
-                  <p className="text-center text-sm text-green-600">Message sent successfully!</p>
+                  <p className="text-green-600 text-sm text-center">{notice}</p>
                 )}
                 {status === "error" && (
-                  <p className="text-center text-sm text-red-500">
-                    Something went wrong. Please try again.
-                  </p>
+                  <p className="text-red-500 text-sm text-center">{notice}</p>
                 )}
                 <button
                   type="submit"
-                  disabled={status === "sending"}
-                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#260F01] py-3 text-sm font-light text-white transition-colors hover:bg-[#4A2C17] disabled:cursor-wait"
+                  className="w-full rounded-full bg-[#260F01] text-white py-3 font-light hover:bg-[#4A2C17] transition-colors flex items-center justify-center gap-2 text-sm cursor-pointer"
                 >
                   {status === "sending" ? (
                     "Sending..."
