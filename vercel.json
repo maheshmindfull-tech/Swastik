@@ -1,5 +1,8 @@
 {
   "rewrites": [
+    { "source": "/dear-pune", "destination": "/dear-pune.html" },
+    { "source": "/dear-pune/", "destination": "/dear-pune.html" },
+    { "source": "/dear-pune/:path*", "destination": "/dear-pune.html" },
     {
       "source": "/((?!api/)(?!.*\\.).*)",
       "destination": "/index.html"

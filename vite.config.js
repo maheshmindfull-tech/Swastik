@@ -1,7 +1,12 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { createStrategicLead } from "./api/strategicLead.js";
+import { dearPuneHtmlPath, dearPuneHtmlPlugin } from "./vite.dearPuneHtml.js";
+
+const root = path.dirname(fileURLToPath(import.meta.url));
 
 function leadApi() {
   return {
@@ -41,5 +46,13 @@ function leadApi() {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), leadApi()],
+  plugins: [react(), tailwindcss(), leadApi(), dearPuneHtmlPlugin()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.join(root, "index.html"),
+        dearPune: dearPuneHtmlPath(),
+      },
+    },
+  },
 });

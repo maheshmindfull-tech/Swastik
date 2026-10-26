@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { isDearPunePath, syncHiddenForestTag } from "./lib/hiddenForestTag";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Journey from "./components/Journey";
@@ -42,7 +43,11 @@ function InnerPage() {
 
 export default function App() {
   const { pathname } = useLocation();
-  const campaign = pathname === "/dear-pune" || pathname.startsWith("/dear-pune/");
+  const campaign = isDearPunePath(pathname);
+
+  useEffect(() => {
+    syncHiddenForestTag(pathname);
+  }, [pathname]);
 
   return (
     <div className="overflow-x-hidden bg-[#FFFCF5]">
