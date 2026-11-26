@@ -2,22 +2,28 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { quote } from "../assets/images";
 import { testimonials } from "../data";
+import { projectTestimonials } from "../data/projectTestimonials";
 
 const PAGE_SIZE = 6;
 
-export default function Testimonials() {
+export default function Testimonials({ projectId }) {
+  const items = projectTestimonials[projectId] || testimonials;
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [projectId]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((current) =>
-        current + PAGE_SIZE >= testimonials.length ? 0 : current + PAGE_SIZE,
+        current + PAGE_SIZE >= items.length ? 0 : current + PAGE_SIZE,
       );
     }, 3000);
     return () => clearInterval(timer);
-  }, []);
+  }, [items]);
 
-  const page = testimonials.slice(index, index + PAGE_SIZE);
+  const page = items.slice(index, index + PAGE_SIZE);
 
   return (
     <section className="py-14 bg-[#F8F5F2]">

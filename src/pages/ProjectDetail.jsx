@@ -46,7 +46,7 @@ export default function ProjectDetail() {
       <Amenities project={project} />
       <Layouts project={project} />
       {projectId !== "swastik-vyom" && <Gallery project={project} />}
-      <Testimonials />
+      <Testimonials projectId={projectId} />
       <Map project={project} />
     </>
   );
