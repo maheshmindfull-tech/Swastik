@@ -13,7 +13,7 @@ import hometown from "../assets/projects/hometown.avif";
 import spira1 from "../assets/projects/spira1.avif";
 import spira2 from "../assets/projects/spira2.avif";
 import violet from "../assets/projects/violet.avif";
-import upcoming from "../assets/projects/upcoming.png";
+import upcoming from "../assets/upcoming-forest.jpg";
 
 export const upcomingImage = upcoming;
 
@@ -29,7 +29,7 @@ export const projectList = [
       "Top-tier living with excellent connectivity and modern amenities. Conveniently close to offices and shopping complexes.",
     image: yellow,
     buttonText: "View Project",
-    status: "Ongoing",
+    status: "Completed",
   },
   {
     id: "prism-city-skylife",
@@ -40,7 +40,7 @@ export const projectList = [
       "A high-rise residential landmark designed for elevated living with modern architectureand curated amenities.Built for those who seek skyline views, premium comfort, and a distinguished address.",
     image: skylife,
     buttonText: "View Project",
-    status: "Ongoing",
+    status: "Completed",
   },
   {
     id: "swastik-vyom",

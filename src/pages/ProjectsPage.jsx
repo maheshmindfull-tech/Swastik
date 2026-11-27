@@ -67,15 +67,27 @@ export default function ProjectsPage() {
 
         {tab === "Upcoming" && (
           <div className="relative h-[100svh] w-full">
-            <img src={upcomingImage} alt="Upcoming Project" className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute bottom-[9%] left-1/2 -translate-x-1/2 sm:bottom-[9%] sm:left-[17%] sm:translate-x-0">
-              <button
-                type="button"
-                className="rounded-full border border-white bg-white px-6 py-2.5 text-xs tracking-widest text-black transition-all hover:bg-transparent hover:text-white sm:px-8 sm:py-3 sm:text-sm"
+            <img
+              src={upcomingImage}
+              alt="Upcoming project, codename The Hidden Forest"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute top-[40%] left-[6%] sm:left-[9%] lg:left-[12%]">
+              <p className="text-[11px] font-medium tracking-[0.34em] text-[#f4ead7]/85 uppercase">Codename</p>
+              <p
+                className="mt-2 whitespace-nowrap text-[clamp(36px,5vw,84px)] leading-none text-[#f7f1e6]"
+                style={{ fontFamily: "Fraunces, Georgia, serif" }}
               >
-                Get More Details
-              </button>
+                The Hidden Forest
+              </p>
             </div>
+            <button
+              type="button"
+              onClick={() => navigate("/dear-pune")}
+              className="absolute bottom-[7%] left-1/2 -translate-x-1/2 rounded-full border border-white bg-white px-6 py-2.5 text-xs tracking-widest text-black transition-all hover:bg-transparent hover:text-white sm:left-[12%] sm:translate-x-0 sm:px-8 sm:py-3 sm:text-sm"
+            >
+              Get More Details
+            </button>
           </div>
         )}
 

@@ -5,35 +5,67 @@ import { careerSeo } from "../seo";
 const jobs = [
   {
     id: 1,
-    title: "Sourcing Manager",
-    experience: "8+ Years",
-    industry: "Real Estate",
+    title: "Recruiter",
+    experience: "1 - 2 Years",
+    industry: "Human Resources",
     description:
-      "Develops sourcing networks and manages lead generation activities. Strengthens business growth through strategic partnerships and coordination.",
+      "Identifies and attracts talent across teams. Manages hiring, screening, and coordination to build a strong workforce.",
   },
   {
     id: 2,
-    title: "Sales Executive",
-    experience: "2+ Years",
-    industry: "Real Estate Sales",
+    title: "Sr. Advocate",
+    experience: "Above 7 Years",
+    industry: "Legal",
     description:
-      "Identifies potential buyers and converts leads into successful sales.\u2028 Builds strong client relationships while achieving business growth targets.",
+      "Handles legal matters, documentation, and compliance for projects and transactions. Provides senior counsel on property and contractual issues.",
   },
   {
     id: 3,
-    title: "Pre Sales Executive",
-    experience: "2+ Years",
-    industry: "Real Estate Sales",
+    title: "Junior Advocate",
+    experience: "2 - 3 Years",
+    industry: "Legal",
     description:
-      "Manages customer engagement, lead generation, and sales coordination.\u2028 Ensures effective communication and smooth lead conversion for business growth.",
+      "Supports legal documentation, due diligence, and case preparation. Assists senior counsel in day-to-day legal coordination.",
   },
   {
     id: 4,
-    title: "Sr. Estimation & Planning Engineer ",
-    experience: "8+ Years",
+    title: "Architect Head",
+    experience: "Above 10 Years",
+    industry: "Architecture",
+    description:
+      "Leads architectural planning and design direction across projects. Ensures design quality, coordination, and timely delivery.",
+  },
+  {
+    id: 5,
+    title: "Sales Executive",
+    experience: "Above 3 Years",
     industry: "Real Estate Sales",
     description:
-      "Prepares accurate project estimates, planning, and execution strategies.\u2028 Ensures efficient resource management and smooth project coordination",
+      "Identifies potential buyers and converts leads into successful sales. Builds strong client relationships while achieving business growth targets.",
+  },
+  {
+    id: 6,
+    title: "Presales",
+    experience: "Above 2 Years",
+    industry: "Real Estate Sales",
+    description:
+      "Manages customer engagement, lead generation, and sales coordination. Ensures effective communication and smooth lead conversion for business growth.",
+  },
+  {
+    id: 7,
+    title: "CRM Executive",
+    experience: "3 - 4 Years",
+    industry: "Customer Relations",
+    description:
+      "Manages customer relationships, follow-ups, and service coordination. Keeps client communication clear from enquiry through handover.",
+  },
+  {
+    id: 8,
+    title: "Accounts Manager",
+    experience: "Above 12 Years",
+    industry: "Accounts",
+    description:
+      "Oversees accounts, financial records, and reporting. Ensures accurate bookkeeping and smooth financial coordination.",
   },
 ];
 

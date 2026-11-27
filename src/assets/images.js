@@ -9,7 +9,7 @@ import prismGreen from "./prism-green.png";
 import prismSkylife from "./prism-skylife.png";
 import prismYellow from "./prism-yellow.avif";
 import prismBlue from "./prism-blue.avif";
-import upcoming from "./upcoming.png";
+import upcoming from "./upcoming-forest.jpg";
 import brandSun from "./brand-sun.png";
 import brandCoin from "./brand-coin.png";
 import brandWordmark from "./brand-wordmark.png";

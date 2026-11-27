@@ -41,14 +41,25 @@ export default function Projects() {
           >
             <img
               src={upcoming}
-              alt="Upcoming Project"
+              alt="Upcoming project, codename The Hidden Forest"
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-[8%] left-[8%] sm:left-[12%] lg:left-[17%]">
-              <button className="px-6 sm:px-8 py-2.5 sm:py-3 border border-white text-black bg-white text-xs sm:text-sm tracking-widest rounded-full hover:bg-transparent hover:text-white transition-all">
-                View Brochure
-              </button>
+            <div className="absolute top-[38%] left-[7%] text-white sm:left-[10%] lg:left-[14%]">
+              <p className="text-[10px] font-medium tracking-[0.28em] text-white/85 uppercase">Codename</p>
+              <p
+                className="mt-1 whitespace-nowrap text-[clamp(26px,3.8vw,52px)] leading-none"
+                style={{ fontFamily: "Fraunces, Georgia, serif" }}
+              >
+                The Hidden Forest
+              </p>
             </div>
+            <button
+              type="button"
+              onClick={() => navigate("/dear-pune")}
+              className="absolute bottom-[7%] left-[7%] rounded-full border border-white bg-white px-6 py-2.5 text-xs tracking-widest text-black transition-all hover:bg-transparent hover:text-white sm:left-[10%] sm:px-8 sm:py-2.5 sm:text-sm lg:left-[14%]"
+            >
+              Get More Details
+            </button>
           </div>
         ) : (
           <div

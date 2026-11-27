@@ -60,7 +60,7 @@ export const projects = [
     location: "Charholi, PCMC",
     configurations: ["2 BHK", "3 BHK"],
     image: prismSkylife,
-    status: "Ongoing",
+    status: "Completed",
   },
   {
     id: "swastik-vyom",
@@ -68,7 +68,7 @@ export const projects = [
     location: "Bhosari, Pune",
     configurations: ["2 BHK", "3 BHK", "4 BHK"],
     image: prismYellow,
-    status: "Ongoing",
+    status: "Completed",
   },
   {
     id: "prism-city-blue",

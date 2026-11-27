@@ -213,7 +213,7 @@ export const gallerySeo = {
 
 const careerTitle = "Careers at Swastik Realty Group | Jobs in Pune";
 const careerDescription =
-  "Join Swastik Realty Group in Pune. Open roles include Sourcing Manager, Sales Executive, Pre Sales Executive, and Estimation Engineer.";
+  "Join Swastik Realty Group in Pune. Open roles include Recruiter, Advocate, Architect Head, Sales, Presales, CRM Executive, and Accounts Manager.";
 
 export const careerSeo = {
   title: careerTitle,
