@@ -75,6 +75,14 @@ import img134 from "../assets/gallery/t4-BSZEaEn3.png";
 
 export const galleryYears = ["2023","2024","2025","2026","BDAY CELEBRATION","Employee award","Employee engagement activities","Trip"];
 
+export const galleryVideos = [
+  { id: "nbSa6Y-8o90", title: "Swastik Realty Group – Diwali Celebration 2026 | Celebrating Togetherness!" },
+  { id: "IgDE7afC3O0", title: "100+ Happy Families Begin a New Journey | Prism City Gruhpravesh 2026 | Pune" },
+  { id: "WZRoskhWEKg", title: "Celebrating New Beginnings | Prism City Possession Ceremony" },
+  { id: "gL1wX9XddEU", title: "A New Beginning | Prism City Possession Ceremony" },
+  { id: "KKu0crw9dBk", title: "Why Families Chose Prism City | Customer Testimonial" },
+];
+
 export const galleryAlbums = [
 { date: "26 JAN 2023", subtitle: "India's Independence Day", year: "2023", items: [{ type: "image", src: img0 }, { type: "image", src: img1 }, { type: "image", src: img2 }, { type: "image", src: img3 }] },
 { date: "Prism City Indigo", subtitle: "First Brick Work 2023", year: "2023", items: [{ type: "image", src: img7 }, { type: "image", src: img8 }, { type: "image", src: img9 }, { type: "image", src: img10 }] },

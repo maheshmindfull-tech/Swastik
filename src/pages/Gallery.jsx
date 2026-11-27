@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { galleryAlbums, galleryYears } from "../data/gallery";
+import { galleryAlbums, galleryVideos, galleryYears } from "../data/gallery";
 import useSeo from "../hooks/useSeo";
 import { gallerySeo } from "../seo";
 
@@ -66,6 +66,38 @@ export default function GalleryPage() {
       </div>
 
       <div className="space-y-10 px-8 pb-10">
+        {filter !== "image" && (
+          <div>
+            <h2 className="mb-4 text-lg font-semibold text-[#050505]">Videos</h2>
+            <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {galleryVideos.map((video) => (
+                <a
+                  key={video.id}
+                  href={`https://www.youtube.com/watch?v=${video.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative block overflow-hidden rounded-lg bg-black"
+                >
+                  <img
+                    src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                    alt=""
+                    className="h-48 w-full object-cover sm:h-56"
+                  />
+                  <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-[#260F01] shadow">
+                      <svg viewBox="0 0 24 24" className="ml-0.5 h-6 w-6" fill="currentColor" aria-hidden="true">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </span>
+                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-3 pt-8 pb-3 text-sm leading-snug font-medium text-white">
+                    <span className="line-clamp-2">{video.title}</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
         {galleryAlbums
           .filter((album) => album.year === year)
           .map((album) => {

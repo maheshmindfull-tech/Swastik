@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # The Hidden Forest campaign is its own HTML entry.
+  RewriteRule ^dear-pune(?:/.*)?$ /dear-pune.html [L]
+
+  # Leave real files and folders alone.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # React routes.
+  RewriteRule ^ index.html [L]
+</IfModule>
